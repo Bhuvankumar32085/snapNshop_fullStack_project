@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Items</title>
+    <link rel="stylesheet" href="/user/index.css" />
+    <link rel="stylesheet" href="/user/nav.css">
+    <link rel="stylesheet" href="/user/footer.css">
+  </head>
+  <body>
+    
+  <!-- Navbar -->
+  <nav class="navbar">
+   <div class="logo">SnapN<span>Shop</span></div>
+ 
+   <div class="search-container">
+           <input type="search"  id="search-input" placeholder="Search for products...">
+           <button id="search-btn">🔍</button>
+   </div>
+ 
+   <ul class="nav-links">
+       <!-- <li><a href="/">Log Out</a></li> -->
+       <li><a href="/user/<%= userData._id%>/cart">cart</a></li>
+       <li><a href="/user/<%= userData._id%>/info">you</a></li>
+       <li><a href="/" class="btn">Log&nbsp;Out</a></li>
+   </ul>
+ 
+   <div class="hamburger">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+   </div>
+ </nav>
+ <div class="all">
+  <div class="div-con">
+      <% for( let i = 0; i < items.length; i++ ) { %>
+         <div class="card">
+              <div class="img">
+                  <img src="<%= items[i].i_img  %>" alt="img" />
+              </div>
+              <div class="text">
+                  <p>Name : <%= items[i].i_name %></p>
+                  <p>Price : <%= items[i].i_price %></p>
+                  <p>Brand : <%= items[i].i_brand_name %></p>
+                  <div class="btn">
+                      <form action="">
+                          <button>Buy</button>
+                      </form>
+                      <form method="post" action="/user/<%= userData._id %>/<%= items[i]._id %>/addcart?_method=PUT">
+                          <button>Add Cart</button>
+                      </form>
+                  </div>
+              </div>
+         </div>
+       <% } %>  
+  </div>
+  <div class="user-info">
+    
+  </div>
+       </div>
+     <%- include('footer.ejs') %>
+  </body>
+</html>

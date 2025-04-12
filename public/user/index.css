@@ -1,0 +1,163 @@
+.all {
+    font-family: "Poppins", sans-serif;
+    background-color: #F8F9FA; 
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    color: #333333;
+}
+
+/* Container */
+.div-con {
+    margin-top: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+}
+
+.user-info{
+    position: absolute;
+}
+/* Card Styling */
+.card {
+    background: #FFFFFF; /* Clean white for a fresh look */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid #FF6F61; /* Highlight effect */
+}
+
+/* Image */
+.img {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FA;
+    padding: 10px;
+}
+
+.img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .img img {
+    transform: scale(1.05);
+}
+
+/* Text Section */
+.text {
+    padding: 15px;
+    text-align: center;
+}
+
+.text p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #2C3E50; /* Dark blue for contrast */
+    font-weight: 500;
+}
+
+.text p:nth-child(2) {
+    color: #FF6F61; /* Price color - makes it pop */
+    font-weight: bold;
+}
+
+/* Button */
+.button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    background: #FF6F61;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #E74C3C;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+}
+.btn form button{
+    display: inline-block;
+    width: fit-content;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #FF6F61, #E74C3C); /* Gradient effect */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.btn form{
+    margin-left: 10px;
+}
+/* Hover Effect */
+.button:hover {
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Click Effect */
+.button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled Button */
+.button:disabled {
+    background: #CCCCCC;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .div-con {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+    }
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

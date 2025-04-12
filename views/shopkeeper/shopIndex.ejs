@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>thakur_bhuvan_rajput</h1>
+    <!-- <p><%= shopkeeperdata  %></p> -->
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Items</title>
+    <link rel="stylesheet" href="/user/index.css" />
+    <link rel="stylesheet" href="/user/nav.css">
+    <link rel="stylesheet" href="/user/footer.css">
+  </head>
+  <body>
+    
+  <!-- Navbar -->
+  <nav class="navbar">
+   <div class="logo">SnapN<span>Shop</span></div>
+ 
+   <div class="search-container">
+           <input type="search"  id="search-input" placeholder="Search for products...">
+           <button id="search-btn">🔍</button>
+   </div>
+ 
+   <ul class="nav-links">
+       <li><a href="/shopkeeper/<%= shopkeeperdata.id  %>/additem">Add Item</a></li>
+       <li><a href="/shopkeeper/user">All User</a></li>
+       <li><a href="/" class="btn">Log&nbsp;Out</a></li>
+   </ul>
+ 
+   <div class="hamburger">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+   </div>
+ </nav>
+ <div class="all">
+  <div class="div-con">
+      <% for( let i = 0; i < items.length; i++ ) { %>
+         <div class="card">
+              <div class="img">
+                  <img src="<%= items[i].i_img  %>" alt="img" />
+              </div>
+              <div class="text">
+                  <p>Name : <%= items[i].i_name %></p>
+                  <p>Price : <%= items[i].i_price %></p>
+                  <p>Brand : <%= items[i].i_brand_name %></p>
+                  <div class="btn">
+                      <form action="/shopkeeper/<%= items[i]._id %>/<%= shopkeeperdata.id  %>/delete">
+                          <button>Delete</button>
+                      </form>
+                      <form action="/shopkeeper/<%= items[i]._id %>/<%= shopkeeperdata.id  %>/edit">
+                          <button>Edit</button>
+                      </form>
+                  </div>
+              </div>
+         </div>
+       <% } %>  
+  </div>
+  <div class="user-info">
+    
+  </div>
+       </div>
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>ShopNow</h2>
+                <p>Your go-to online store for the best deals and quality products.</p>
+            </div>
+    
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>Email: support@shopnow.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Shopping Street, NY, USA</p>
+            </div>
+    
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShopNow. All Rights Reserved.</p>
+        </div>
+    </footer>
+  </body>
+</html>
+
+</body>
+</html>

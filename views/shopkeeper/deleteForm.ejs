@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETE ITEM</title>
+    <style>
+        /* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body Styling */
+body {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Form Container */
+form {
+    width: 100%;
+    max-width: 450px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Hover Effect on Form */
+form:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Form Heading */
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Labels */
+form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Input Fields */
+form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Focus Effect on Inputs */
+form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+/* Submit Button */
+form button {
+    width: 100%;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Button Hover Effect */
+form button:hover {
+    background: linear-gradient(45deg, #0056b3, #003c7a);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* Button Click Animation */
+form button:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    form h2 {
+        font-size: 20px;
+    }
+
+    form label {
+        font-size: 13px;
+    }
+
+    form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    form button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <form method="post" action="/shopkeeper/<%= itemId %>/<%= shopkeeperId %>/delete?_method=DELETE">
+        <div class="email">
+            <label for="pass">Email : </label>
+            <input type="text" id="pass" placeholder="Enter your Email" name="s_email" required>
+        </div>
+
+        <div class="pass">
+            <label for="pass">Password : </label>
+            <input type="text" id="pass" placeholder="Enter your password" name="s_password" required>
+        </div>
+        <button>Delete</button>
+    </form>
+</body>
+</html>

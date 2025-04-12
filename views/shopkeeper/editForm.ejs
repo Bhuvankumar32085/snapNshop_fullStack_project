@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        /* Body Styling */
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        /* Form Container */
+        form {
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        /* Hover Effect on Form */
+        form:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Labels */
+        form label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        /* Input Fields */
+        form input {
+            width: 93%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        /* Focus Effect on Inputs */
+        form input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+            outline: none;
+        }
+        
+        /* Submit Button */
+        form button {
+            width: 100%;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        
+        /* Button Hover Effect */
+        form button:hover {
+            background: linear-gradient(45deg, #0056b3, #003c7a);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+            transform: scale(1.05);
+        }
+        
+        /* Button Click Animation */
+        form button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+        
+            form label {
+                font-size: 14px;
+            }
+        
+            form input {
+                font-size: 14px;
+                padding: 10px;
+            }
+        
+            form button {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <form method="post" action="/shopkeeper/<%= itemId%>/<%= shopkeeperId %>/edit?_method=PUT">
+        <label for="na">Image URL : </label>
+        <input type="text" name="u[i_img]"   id="na" value="<%= itemData.i_img %>">
+        
+        <label for="em">Name : </label>
+        <input type="text" name="u[i_name]" id="em" value="<%= itemData.i_name %>">
+
+        <label for="num">Price : </label>
+        <input type="number" name="u[i_price]" id="num" value="<%= itemData.i_price %>">
+
+        <label for="loca">Globle Name : </label>
+        <input type="text" name="u[i_globle_name]"  id="loca" value="<%= itemData.i_globle_name %>">
+
+        <label for="loca">Brand Name : </label>
+        <input type="text" name="u[i_brand_name]"  id="loca" value="<%= itemData.i_brand_name %>">
+        <button>Submit</button>
+    </form>
+</body>
+</html>

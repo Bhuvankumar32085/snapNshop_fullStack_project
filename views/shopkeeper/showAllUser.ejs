@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All User</title>
+    <style>
+    /* Container */
+    .con {
+        margin-top: 120px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Card Styling */
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 280px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+        
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card p {
+        margin: 8px 0;
+        font-size: 16px;
+        color: #333;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .con {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .card {
+            width: 90%;
+            max-width: 320px;
+        }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .card {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    .btn{
+        cursor: pointer;
+    }
+    </style>
+    <link rel="stylesheet" href="/user/index.css" />
+    <link rel="stylesheet" href="/user/nav.css">
+    <link rel="stylesheet" href="/user/footer.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SnapN<span>Shop</span></div>
+      
+        <div class="search-container">
+                <input type="search"  id="search-input" placeholder="Search for products...">
+                <button id="search-btn">🔍</button>
+        </div>
+      
+        <ul class="nav-links">
+            <!-- <li><a href="/users/:userId">Home</a></li> -->
+            <li><a href="/shopkeeper/user">All User</a></li>
+            <li><a href="/" class="btn">Log&nbsp;Out</a></li>
+        </ul>
+      
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+      </nav>
+    <div class="con">
+        <% for( let i = 0; i < allUser.length; i++ ) { %>
+            <div class="card">
+                    <p>Name : <%= allUser[i].u_name %></p>
+                    <p>Email : <%= allUser[i].u_email %></p>
+                    <p>Number : <%= allUser[i].u_phone_num %></p>
+                    <p>Location : <%= allUser[i].u_location %></p>
+                    <p>Item List : <%= allUser[i].u_by_item_list %></p>
+                    <form method="post" action="/shopkeeper/<%= allUser[i]._id %>/user?_method=DELETE">
+                        <button class="btn">
+                          Delete
+                        </button>
+                    </form>
+            </div>
+        <% } %>
+    </div>
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>ShopNow</h2>
+                <p>Your go-to online store for the best deals and quality products.</p>
+            </div>
+    
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>Email: support@shopnow.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Shopping Street, NY, USA</p>
+            </div>
+    
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShopNow. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

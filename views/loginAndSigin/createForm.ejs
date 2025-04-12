@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        .createAccountForUser {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .createAccountForUser div {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 400;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4facfe;
+            box-shadow: 0px 0px 5px rgba(79, 172, 254, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            background: #4facfe;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #3a9be2;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 400px) {
+            .createAccountForUser {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="createAccountForUser">
+        <h3>Create Account For User</h3>
+        <form id="create" method="post" action="/user/createAccountForUser">
+            <div class="c-name">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="u_name" placeholder="Enter Your Name" required>
+            </div>
+
+            <div class="c-email">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="u_email" placeholder="Enter Unique Email" required>
+            </div>
+
+            <div class="c-pass">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="u_password" placeholder="Enter Your Password" required>
+            </div>
+
+            <div class="c-num">
+                <label for="num">Number</label>
+                <input type="text" id="num" name="u_phone_num" maxlength="10" pattern="^\d{10}$" placeholder="Enter Your Number" required>
+            </div>
+                
+            <div class="c-loc">
+                <label for="loc">Location</label>
+                <input type="text" id="loc" name="u_location" placeholder="Enter Your Location" required>
+            </div>
+
+            <div class="c-btn">
+                <button type="submit" class="btn">Create Account</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

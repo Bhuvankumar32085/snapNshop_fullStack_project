@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <style>
+       /* Container styling */
+         .user-account-info {
+             width: 60%;
+             margin: 40px auto;
+             padding: 25px;
+             border-radius: 12px;
+             background: linear-gradient(135deg, #f8f9fa, #e3eaf3);
+             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+             font-family: 'Poppins', sans-serif;
+             transition: transform 0.3s ease-in-out;
+         }
+         
+         /* Hover effect on container */
+         .user-account-info:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+         }
+         
+         /* User information styling */
+         .info-1 p {
+             font-size: 18px;
+             color: #444;
+             margin: 10px 0;
+             font-weight: 600;
+             transition: color 0.3s ease-in-out;
+         }
+         
+         /* Highlight text on hover */
+         .info-1 p:hover {
+             color: #007bff;
+         }
+         
+         /* Edit button container */
+         .info-form-edit {
+             text-align: right;
+             margin-top: 15px;
+         }
+         
+         /* Button styling */
+         .info-form-edit button {
+             background: linear-gradient(45deg, #007bff, #0056b3);
+             color: white;
+             border: none;
+             padding: 10px 18px;
+             font-size: 16px;
+             border-radius: 8px;
+             cursor: pointer;
+             transition: all 0.3s ease-in-out;
+             outline: none;
+             font-weight: 600;
+             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+         }
+         
+         /* Hover effect on button */
+         .info-form-edit button:hover {
+             background: linear-gradient(45deg, #0056b3, #003c7a);
+             box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+             transform: scale(1.05);
+         }
+         
+         /* Button click animation */
+         .info-form-edit button:active {
+             transform: scale(0.95);
+         }
+         
+        
+    </style>
+</head>
+<body>
+    <div class="user-account-info">
+        <h2>Your Details :-</h2>
+        <div class="info-1">
+            <p>Nmae : <%= userData.u_name %></p>
+            <p>Email : <%= userData.u_email %></p>
+            <p>Number : <%= userData.u_phone_num %></p>
+            <p>Location : <%= userData.u_location %></p>
+        </div>
+        <div class="info-form-edit">
+            <form action="/user/<%= userData._id %>/edit">
+                <button>edit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

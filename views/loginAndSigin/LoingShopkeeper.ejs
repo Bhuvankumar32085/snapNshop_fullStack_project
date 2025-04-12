@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login For Shopkeeper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        }
+
+        .shopkeeper {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .shopkeeper div {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 400;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #ff758c;
+            box-shadow: 0px 0px 5px rgba(255, 117, 140, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            background: #ff758c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #e0566c;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 400px) {
+            .shopkeeper {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shopkeeper">
+        <h3>Login For Shopkeeper</h3>
+        <form id="aa" method="post" action="/shopkeeper">
+            <div class="s-name">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="s_name" placeholder="Enter Your Name" required>
+            </div>
+            <div class="s-email">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="s_email" placeholder="Enter Your Email" required>
+            </div>
+            <div class="s-pass">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="s_password" placeholder="Enter Your Password" required>
+            </div>
+            <div class="p-btn">
+                <button type="submit" class="btn">Login For Shopkeeper</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
