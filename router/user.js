@@ -58,7 +58,6 @@ userRout.post(
     "/",
     asyncWrap(async (req, res, next) => {
       const { u_email: email, u_phone_num: num, u_password: pass } = req.body;
-  
       const userData = await User.findOne({ u_email: email });
   
       // 1. Check if user exists
@@ -75,7 +74,10 @@ userRout.post(
       if (userData.u_phone_num !== num) {
         return next(new CostemError( 400,"Phone number does not match"));
       }
-  
+
+      // Set flash message before rendering
+      req.flash('success', 'Login successful!');
+      
       // 4. Success – Render dashboard
       const items = await Item.find();
       res.render("./user/index.ejs", { items, userData });

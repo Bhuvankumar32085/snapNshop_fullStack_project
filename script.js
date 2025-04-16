@@ -8,7 +8,26 @@ const userRout = require("./router/user.js");
 const shopkeeperRout = require("./router/shopkeeper.js");
 const userSchema=require('./schema.js')
 
+//
+const cookieParser=require('cookie-parser')
+app.use(cookieParser('keyboard cat'))
 
+//express session
+const session = require('express-session')
+const flash = require('connect-flash');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    expires:Date.now()+7*24*60*60*1000,
+    maxAge:7*24*60*60*1000,
+    httpOnly:true,
+  }
+}))
+
+//connect-flash for message
+app.use(flash());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -41,7 +60,7 @@ function asyncWrap(fn) {
 }
 
 //root
-app.get("/", (req, res) => {
+app.get("/", (req, res,next) => {
   res.render("rootForm.ejs");
 });
 
@@ -55,6 +74,14 @@ app.get(
     res.render("./user/index.ejs", { items, userData });
   })
 );
+
+//flash middlewaier
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.msg = req.flash('msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 //user router
 app.use("/user", userRout);
