@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -100,30 +101,54 @@
 <body>
     <div class="createAccountForUser">
         <h3>Create Account For User</h3>
-        <form id="create" method="post" action="/user/createAccountForUser">
+        <form id="create" method="post" action="/user/createAccountForUser" class="needs-validation" novalidate>
             <div class="c-name">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="u_name" placeholder="Enter Your Name" required>
+                <input type="text" id="name" class="form-control" id="validationCustom01" name="u_name" placeholder="Enter Your Name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
             <div class="c-email">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="u_email" placeholder="Enter Unique Email" required>
+                <input type="email" id="email" name="u_email" class="form-control" id="validationCustom01" placeholder="Enter Unique Email" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide a valid email.
+                </div>
             </div>
 
             <div class="c-pass">
                 <label for="pass">Password</label>
-                <input type="password" id="pass" name="u_password" placeholder="Enter Your Password" required>
+                <input type="password" id="pass" name="u_password" class="form-control" minlength="6" id="validationCustom01" placeholder="Enter Your Password" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Password must be at least 6 characters long.
+                </div>
             </div>
 
             <div class="c-num">
                 <label for="num">Number</label>
-                <input type="text" id="num" name="u_phone_num" maxlength="10" pattern="^\d{10}$" placeholder="Enter Your Number" required>
+                <input type="text" id="num" name="u_phone_num" class="form-control" id="validationCustom01" maxlength="10" pattern="^\d{10}$" placeholder="Enter Your Number" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide a valid Number.
+                </div>
             </div>
                 
             <div class="c-loc">
                 <label for="loc">Location</label>
-                <input type="text" id="loc" name="u_location" placeholder="Enter Your Location" required>
+                <input type="text" id="loc" name="u_location" class="form-control" id="validationCustom01" placeholder="Enter Your Location" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
             <div class="c-btn">
@@ -131,5 +156,27 @@
             </div>
         </form>
     </div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+      
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+      
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+          }, false)
+        })
+      })()
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>

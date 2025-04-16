@@ -4,6 +4,17 @@ const Item = require("../model/index.js");
 const User = require("../model/user.js");
 const ShopKeeper = require("../model/shopkeeper.js");
 const CostemError = require("../error.js");
+const {userSchema,shopkeeperSchema}=require('../schema.js')
+
+const validationShopkeeperSchema = (req, res, next) => {
+  const { error } = shopkeeperSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new CostemError(400, msg);
+  } else {
+    next();
+  }
+};
 
 //error handel for async fun using asyncWrap
 function asyncWrap(fn) {
@@ -19,7 +30,7 @@ shopkeeperRout.get("/loingShopkeeper", (req, res) => {
 
 //login for shopkeeper <<2>>
 shopkeeperRout.post(
-  "/",
+  "/",validationShopkeeperSchema,
   asyncWrap(async (req, res, next) => {
     let { s_name: name, s_email: email, s_password: pass } = req.body;
     let shopkeeperdata = await ShopKeeper.findOne({
@@ -33,9 +44,19 @@ shopkeeperRout.post(
       pass == shopkeeperdata.s_password
     ) {
       res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
-    } else {
-      let err = "shopkeeper not found plz try again";
-      next(new CostemError(err));
+    }
+
+    if(name!= shopkeeperdata.s_name){
+      let err = "enter right name";
+      next(new CostemError(404,err));
+    }
+    if(email!= shopkeeperdata.s_email){
+      let err = "enter right email";
+      next(new CostemError(500,err));
+    }
+    if(pass!= shopkeeperdata.s_password){
+      let err = "enter right password";
+      next(new CostemError(500,err));
     }
   })
 );

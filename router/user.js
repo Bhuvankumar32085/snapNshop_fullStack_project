@@ -4,7 +4,7 @@ const Item = require("../model/index.js");
 const User = require("../model/user.js");
 const joi = require("joi");
 const CostemError = require('../error.js');
-const userSchema=require('../schema.js')
+const {userSchema,shopkeeperSchema}=require('../schema.js')
 
 const validationUserSchema = (req, res, next) => {
     const { error } = userSchema.validate(req.body);
