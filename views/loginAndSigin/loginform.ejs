@@ -100,23 +100,36 @@
 <body>
     <div class="user">
         <h3>Login For User</h3>
-        <form id="aa" method="post" action="/user">
-            <div class="u-email">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="u_email" placeholder="Enter Your Email" required>
+        <form id="aa" method="POST" action="/user" autocomplete="on">
+            <div class="u-name">
+              <label for="username">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                placeholder="Enter your name"  
+                required 
+                autocomplete="username"
+              >
             </div>
-            <div class="u-num">
-                <label for="num">Phone Number</label>
-               <input type="text" id="num" name="u_phone_num" placeholder="Enter Your Number" required>
-            </div>
+          
             <div class="u-pass">
-                <label for="pass">Password</label>
-                <input type="password" id="pass" name="u_password" placeholder="Enter Your Password" required>
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Enter your password" 
+                required 
+                autocomplete="current-password"
+              >
             </div>
+          
             <div class="p-btn">
-                <button type="submit" class="btn">Login For User</button>
+              <button type="submit" class="btn">Login as User</button>
             </div>
-        </form>
+          </form>
+          
     </div>
 </body>
 </html>

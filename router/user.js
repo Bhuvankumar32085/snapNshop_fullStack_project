@@ -4,7 +4,9 @@ const Item = require("../model/index.js");
 const User = require("../model/user.js");
 const joi = require("joi");
 const CostemError = require('../error.js');
-const {userSchema,shopkeeperSchema}=require('../schema.js')
+const {userSchema,shopkeeperSchema}=require('../schema.js');
+const passport = require("passport");
+const { isloggen } = require("../middleware.js");
 
 const validationUserSchema = (req, res, next) => {
     const { error } = userSchema.validate(req.body);
@@ -31,56 +33,41 @@ userRout.get("/createAccountForm", (req, res) => {
 
 // <<2>>
 userRout.post(
-  "/createAccountForUser",validationUserSchema,
+  "/createAccountForUser",
   asyncWrap(async (req, res, next) => {
     let { u_name, u_email, u_password, u_phone_num, u_location } = req.body;
-    // console.log(u_name, u_email,u_password,u_phone_num,u_location);
+    console.log(u_name, u_email,u_password,u_phone_num,u_location);
     let user1 = new User({
-      u_name: u_name,
+      username: u_name,
       u_email: u_email,
-      u_password: u_password,
       u_phone_num: u_phone_num,
       u_location: u_location,
       u_by_item_list: "none",
     });
-    let userData = await user1.save();
+    
+    let userData=await User.register(user1,u_password)
+
+    // Set flash message before rendering
+    req.flash('success', 'create account successful!');
     res.redirect(`/users/${userData._id}`);
   })
 );
 
 //login btn on root <<1>>
 userRout.get("/loginform", (req, res) => {
+  // console.log(req.isAuthenticated())
   res.render("./loginAndSigin/loginform.ejs");
 });
 
 //login <<2>>
 userRout.post(
-    "/",
+    "/",passport.authenticate('local',{
+      failureRedirect:'/user/createAccountForm',
+      failureFlash:true,
+    }),
     asyncWrap(async (req, res, next) => {
-      const { u_email: email, u_phone_num: num, u_password: pass } = req.body;
-      const userData = await User.findOne({ u_email: email });
-  
-      // 1. Check if user exists
-      if (!userData) {
-        return next(new CostemError( 404,"User not found with this email"));
-      }
-  
-      // 2. Validate password
-      if (userData.u_password !== pass) {
-        return next(new CostemError( 400,"Incorrect password"));
-      }
-  
-      // 3. Validate phone number
-      if (userData.u_phone_num !== num) {
-        return next(new CostemError( 400,"Phone number does not match"));
-      }
-
-      // Set flash message before rendering
-      req.flash('success', 'Login successful!');
-      
-      // 4. Success – Render dashboard
-      const items = await Item.find();
-      res.render("./user/index.ejs", { items, userData });
+        req.flash('success', 'Login successful!');
+        res.redirect(`users/${req.user._id}`)
     })
   );
 
@@ -90,6 +77,9 @@ userRout.get(
   asyncWrap(async (req, res, next) => {
     let { id } = req.params;
     let userData = await User.findById(id);
+    req.flash('success', 'Login successful!');
+      // Set flash message before rendering
+      req.flash('msg', 'edit successful!');
     res.render("./user/userAccountInfo.ejs", { userData });
   })
 );
@@ -115,6 +105,17 @@ userRout.put(
   })
 );
 
+// user logout
+userRout.get('/logout',(req,res,next)=>{
+  req.logout((err)=>{
+    if(err){
+      next(err)
+    }
+      req.flash('success', 'Logout successful!');
+      res.redirect(`/`)
+  })
+})
+
 //add cart item for user side
 userRout.put(
   "/:userId/:itemId/addcart",
@@ -124,6 +125,7 @@ userRout.put(
     let updata = await User.findById(userId);
     updata.addcart.push(itemData);
     await updata.save();
+    req.flash('success','add item')
     res.redirect(`/users/${userId}`);
   })
 );
@@ -150,8 +152,16 @@ userRout.delete(
     });
 
     await user.save();
+    req.flash('success','Delete item')
     res.redirect(`/users/${userId}`);
   })
 );
+
+userRout.get('/buy',isloggen,(req,res,next)=>{
+  
+})
+userRout.get('/buy',isloggen,(req,res,next)=>{
+  
+})
 
 module.exports = userRout;

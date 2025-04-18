@@ -115,6 +115,7 @@
     </style>
 </head>
 <body>
+    <%- include('../flash.ejs') %>
     <form method="post" action="/user/<%= userData._id %>/edit?_method=PUT">
         <label for="na">Name:</label>
         <input type="text" name="u[u_name]"   id="na" value="<%= userData.u_name %>">

@@ -1,20 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const passpostLocalMongoose=require('passport-local-mongoose')
 
 const userSchema = new Schema({
-  u_name: {
-    type: String,
-    required: [true, "Name is required"]
-  },
   u_email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
     match: [/\S+@\S+\.\S+/, "Please provide a valid email"]
-  },
-  u_password: {
-    type: String,
-    required: [true, "Password is required"]
   },
   u_phone_num: {
     type: String,
@@ -44,5 +37,7 @@ const userSchema = new Schema({
 }, {
   timestamps: true
 });
+
+userSchema.plugin(passpostLocalMongoose)
 
 module.exports = mongoose.model("user", userSchema);

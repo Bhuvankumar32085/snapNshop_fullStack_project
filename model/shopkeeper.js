@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema=mongoose.Schema;
 
-let schema = new mongoose.Schema({
+let shopkeeperSchema = new Schema({
   s_name: {
     type: String,
   },
@@ -13,5 +14,5 @@ let schema = new mongoose.Schema({
   },
 });
 
-let shopKeeper = mongoose.model("shopkeeper", schema);
+let shopKeeper = mongoose.model("shopkeeper", shopkeeperSchema);
 module.exports = shopKeeper;

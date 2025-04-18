@@ -6,9 +6,16 @@ const app = express();
 const CostemError = require("./error.js");
 const userRout = require("./router/user.js");
 const shopkeeperRout = require("./router/shopkeeper.js");
-const userSchema=require('./schema.js')
 
-//
+//model DB
+const Item = require("./model/index.js");
+const User = require("./model/user.js");
+
+// passport
+const passport=require('passport')
+const localStrategy=require('passport-local')
+
+//cookieParser 
 const cookieParser=require('cookie-parser')
 app.use(cookieParser('keyboard cat'))
 
@@ -28,6 +35,15 @@ app.use(session({
 
 //connect-flash for message
 app.use(flash());
+
+//passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new localStrategy(User.authenticate()));
+
+//passport seialize and desialize middleware
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -49,8 +65,6 @@ main()
     console.log("DB err", err);
   });
 
-const Item = require("./model/index.js");
-const User = require("./model/user.js");
 
 //error handel for async fun using asyncWrap
 function asyncWrap(fn) {
@@ -59,10 +73,14 @@ function asyncWrap(fn) {
   };
 }
 
-//root
-app.get("/", (req, res,next) => {
-  res.render("rootForm.ejs");
+//flash middlewaier
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.msg = req.flash('msg');
+  res.locals.error = req.flash('error');
+  next();
 });
+
 
 //rediret to user fornt page
 app.get(
@@ -70,17 +88,14 @@ app.get(
   asyncWrap(async (req, res, next) => {
     let { userId } = req.params;
     let items = await Item.find();
-    let userData = await User.findById(userId);
+    let userData = await User.findById(userId)
     res.render("./user/index.ejs", { items, userData });
   })
 );
 
-//flash middlewaier
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.msg = req.flash('msg');
-  res.locals.error = req.flash('error');
-  next();
+//root
+app.get("/", (req, res,next) => {
+  res.render("rootForm.ejs");
 });
 
 //user router
