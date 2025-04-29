@@ -47,9 +47,14 @@ userRout.post(
     
     let userData=await User.register(user1,u_password)
 
-    // Set flash message before rendering
-    req.flash('success', 'create account successful!');
-    res.redirect(`/users/${userData._id}`);
+    req.login(userData,(error)=>{
+      if(error){
+        return next(error)
+      }
+      // Set flash message before rendering
+      req.flash('success', 'create account successful!');
+      res.redirect(`/users/${userData._id}`);
+    })
   })
 );
 
@@ -88,6 +93,7 @@ userRout.get(
 userRout.get(
   "/:id/edit",
   asyncWrap(async (req, res, next) => {
+    console.log(req.user)
     let { id } = req.params;
     let userData = await User.findById(id);
     res.render("./user/userEditForm.ejs", { userData });
@@ -104,6 +110,7 @@ userRout.put(
     res.redirect(`/user/${id}/info`);
   })
 );
+
 
 // user logout
 userRout.get('/logout',(req,res,next)=>{
@@ -157,9 +164,6 @@ userRout.delete(
   })
 );
 
-userRout.get('/buy',isloggen,(req,res,next)=>{
-  
-})
 userRout.get('/buy',isloggen,(req,res,next)=>{
   
 })

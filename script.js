@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -7,43 +9,61 @@ const CostemError = require("./error.js");
 const userRout = require("./router/user.js");
 const shopkeeperRout = require("./router/shopkeeper.js");
 
+//require razprpay
+const Razorpay = require("razorpay");
+const crypto = require("crypto"); // For secure payment verification
+
+// Razorpay instance
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
 //model DB
 const Item = require("./model/index.js");
 const User = require("./model/user.js");
 
 // passport
-const passport=require('passport')
-const localStrategy=require('passport-local')
+const passport = require("passport");
+const localStrategy = require("passport-local");
 
-//cookieParser 
-const cookieParser=require('cookie-parser')
-app.use(cookieParser('keyboard cat'))
+//cookieParser
+const cookieParser = require("cookie-parser");
+app.use(cookieParser("keyboard cat"));
 
 //express session
-const session = require('express-session')
-const flash = require('connect-flash');
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-    expires:Date.now()+7*24*60*60*1000,
-    maxAge:7*24*60*60*1000,
-    httpOnly:true,
-  }
-}))
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "keyboard cat", // It's better to store the secret in environment variables
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      httpOnly: true, // Ensures the cookie cannot be accessed via JavaScript
+      secure: process.env.NODE_ENV === 'production', // Make cookie secure in production (only sent over HTTPS)
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI || "mongodb://127.0.0.1:27017/snapnshop", // Use environment variable for MongoDB URI
+      collectionName: "sessions", // Custom name for session collection
+      ttl: 7 * 24 * 60 * 60, // Set TTL for the session in seconds (7 days in this case)
+    }),
+  })
+);
 
 //connect-flash for message
 app.use(flash());
 
 //passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 
 //passport seialize and desialize middleware
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -65,7 +85,6 @@ main()
     console.log("DB err", err);
   });
 
-
 //error handel for async fun using asyncWrap
 function asyncWrap(fn) {
   return function (req, res, next) {
@@ -75,12 +94,12 @@ function asyncWrap(fn) {
 
 //flash middlewaier
 app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.msg = req.flash('msg');
-  res.locals.error = req.flash('error');
+  res.locals.success = req.flash("success");
+  res.locals.msg = req.flash("msg");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
-
 
 //rediret to user fornt page
 app.get(
@@ -88,13 +107,79 @@ app.get(
   asyncWrap(async (req, res, next) => {
     let { userId } = req.params;
     let items = await Item.find();
-    let userData = await User.findById(userId)
+    let userData = await User.findById(userId);
     res.render("./user/index.ejs", { items, userData });
   })
 );
 
+//payment method
+app.post(
+  "/user/:userId/:itemId/buy",
+  asyncWrap(async (req, res, next) => {
+    const { userId, itemId } = req.params;
+    const item = await Item.findById(itemId);
+
+    if (!item) {
+      throw new CostemError(404, "Item not found");
+    }
+
+    const amount = item.i_price * 100; // Convert to paise (Razorpay expects amount in paise)
+
+    // Razorpay order options
+    const orderOptions = {
+      amount: amount,
+      currency: "INR",
+      receipt: `receipt_${itemId}`,
+      payment_capture: 1, // Auto-capture the payment
+    };
+
+    try {
+      // Create Razorpay order
+      const order = await razorpay.orders.create(orderOptions);
+
+      // Send order details to the frontend
+      res.render("payment", {
+        orderId: order.id,
+        keyId: process.env.RAZORPAY_KEY_ID, // Pass Razorpay Key ID to frontend
+        amount: amount,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new CostemError(500, "Error creating Razorpay order");
+    }
+  })
+);
+
+// Payment verification route
+app.post("/payment/verify", async (req, res) => {
+  const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+    req.body;
+
+  // Razorpay secret key (for signature verification)
+  const secret = process.env.RAZORPAY_KEY_SECRET;
+
+  // Create a string from payment details to verify
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+  // Create HMAC hash using the secret key
+  const expectedSignature = crypto
+    .createHmac("sha256", secret)
+    .update(body)
+    .digest("hex");
+
+  // Compare the generated signature with the received one
+  if (expectedSignature === razorpay_signature) {
+    // Payment is successful
+    res.json({ message: "Payment verified successfully!" });
+    // Here, you can handle the success logic like updating the order status in your database
+  } else {
+    // Payment failed
+    res.status(400).json({ message: "Payment verification failed!" });
+  }
+});
+
 //root
-app.get("/", (req, res,next) => {
+app.get("/", (req, res, next) => {
   res.render("rootForm.ejs");
 });
 

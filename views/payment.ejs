@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .payment-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 300px;
+    }
+
+    .payment-container h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+    }
+
+    #pay-button {
+      background: #0072ff;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #pay-button:hover {
+      background: #0056cc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="payment-container">
+    <h1>Complete Payment</h1>
+    <button id="pay-button">Pay ₹<%= amount/100 %></button>
+  </div>
+
+  <script>
+    var options = {
+      key: "<%= keyId %>",
+      amount: "<%= amount %>",
+      currency: "INR",
+      name: "SnapNShop",
+      description: "Purchase Item",
+      order_id: "<%= orderId %>",
+      handler: function (response) {
+        console.log(response);
+
+        fetch("/payment/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(response),
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          // window.location.href = "/payment/success";
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Payment verification failed");
+        });
+      },
+      prefill: {
+        name: "Your Name",
+        email: "your-email@example.com",
+        contact: "9999999999"
+      },
+      notes: {
+        address: "SnapNShop Office"
+      },
+      theme: {
+        color: "#0072ff"
+      }
+    };
+
+    // Ye 2 line add karo
+    var rzp1 = new Razorpay(options);
+
+    document.getElementById('pay-button').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+    }
+</script>
+
+
+</body>
+</html>

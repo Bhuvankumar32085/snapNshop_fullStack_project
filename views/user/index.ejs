@@ -45,7 +45,7 @@
                   <p>Price : <%= items[i].i_price %></p>
                   <p>Brand : <%= items[i].i_brand_name %></p>
                   <div class="btn">
-                      <form action="">
+                      <form method="post" action="/user/<%= userData._id %>/<%= items[i]._id %>/buy">
                           <button>Buy</button>
                       </form>
                       <form method="post" action="/user/<%= userData._id %>/<%= items[i]._id %>/addcart?_method=PUT">
