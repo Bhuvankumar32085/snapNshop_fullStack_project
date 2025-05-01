@@ -36,7 +36,7 @@ userRout.post(
   "/createAccountForUser",
   asyncWrap(async (req, res, next) => {
     let { u_name, u_email, u_password, u_phone_num, u_location } = req.body;
-    console.log(u_name, u_email,u_password,u_phone_num,u_location);
+    // console.log(u_name, u_email,u_password,u_phone_num,u_location);
     let user1 = new User({
       username: u_name,
       u_email: u_email,
@@ -67,7 +67,7 @@ userRout.get("/loginform", (req, res) => {
 //login <<2>>
 userRout.post(
     "/",passport.authenticate('local',{
-      failureRedirect:'/user/createAccountForm',
+      failureRedirect:'/user/loginform',
       failureFlash:true,
     }),
     asyncWrap(async (req, res, next) => {

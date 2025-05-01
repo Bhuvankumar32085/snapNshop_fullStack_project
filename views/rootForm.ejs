@@ -1,171 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="rootForm.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">SnapN<span>Shop</span></div>
 
-      <!-- <div class="search-container"> -->
-        <form method="post" class="search-container" action="/search">
-          <input
-            type="text"
-            id="search-input"
-            name="q"        
-            placeholder="Search for products..."
-            required
-          />
-          <button type="submit" id="search-btn">🔍</button>
-        </form>
-      <!-- </div> -->
-      
-        <ul class="nav-links">
-          <li><a href="/user/createAccountForm">Create&nbsp;Account</a></li>
-          <li><a href="/user/loginform" class="btn">Log&nbsp;In</a></li>
-        </ul>
-     
-
-      <div class="hamburger">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-    </nav>
-    <%- include('./flash.ejs') %>
-    <div class="main">  
-          <main>
-            <div class="p-div-con">
-              <div class="img-div">
-                <img src="./image/PC_Hero_2x-toys_1._CB582765723_.jpg" alt="" />
-              </div>
-      
-              <div class="card1-con">
-                <div class="card1">
-                  <a href="/tab/lux">
-                    <div class="c-1">
-                      <div class="img">
-                        <img src="./image/36235261.avif" alt="" />
-                      </div>
-                      <div class="c-1-info">
-                        <h3 class="c-1-infoh3">Flaw-less Glow</h3>
-                        <p>
-                          Introducing new LUX Flaw-less Glow, a reinvention of our
-                          iconic soap bar proven to deliver superior skin glow
-                          results. Infused with Vitamin C and E, this powerhouse
-                          formula visibly reduces dark spots and leaves your skin
-                          glowing and hydrated.
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-      
-                <div class="card2">
-                  <a href="/tab/pantin">
-                      <div class="c-2">
-                          <img src="./image/th (1).jpeg" alt="">
-                      </div></a>
-                  <a href="/tab/Head_&_Shoulders">
-                      <div class="c-2">
-                         <img src="./image/th (2).jpeg" alt="">
-                      </div></a>
-                  <a href="/tab/loreal">
-                      <div class="c-2">
-                         <img src="./image/th (3).jpeg" alt="">
-                      </div></a>
-                  <a href="/tab/herbal_essences">
-                      <div class="c-2">
-                         <img src="./image/th.jpeg" alt="">
-                     </div></a>
-                </div>
-              </div>
-          
-              <div class="card1-con">
-                  <div class="card2">
-                      <a href="/tab/fortune">
-                          <div class="c-2">
-                              <img src="./image/61bqIKOLJzL._SY342_.jpg" alt="">
-                          </div></a>
-                      <a href="/tab/tata dal">
-                          <div class="c-2">
-                             <img src="./image/6efd204b-05d7-42ef-8582-164639e14eaf._CR0,0,3000,600_SX1920_.jpg" alt="">
-                          </div></a>
-                      <a href="/tab/good day">
-                          <div class="c-2">
-                             <img src="./image/91uSmU-fk4L._SX679_PIbundle-12,TopRight,0,0_AA679SH20_.jpg" alt="">
-                          </div></a>
-                      <a href="/tab/bingo">
-                          <div class="c-2">
-                             <img src="./image/51OqN1FHk9L._SX300_SY300_QL70_FMwebp_.webp" alt="">
-                         </div></a>
-                    </div>
-      
-                <div class="card1">
-                  <a href="/tab/tata dry fruits">
-                    <div class="c-1">
-                      <div class="img">
-                        <img src="./image/th (4).jpeg" alt="" />
-                      </div>
-                      <div class="c-1-info">
-                        <h3 class="c-1-infoh3">Dry Fruit</h3>
-                        <p>
-                          HyperFoods RawFruit Jumbo 9 Dry Fruit Combo Dark Wood Gift Box | Premium Dried Fruit Berries Combo Gift Pack with Greeting Card | Sorry Note Card Apology Gift for Boyfriend Girlfriend Wife Husband
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </main>
-        </div>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title></title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+      <link rel="stylesheet" href="rootForm.css" />
+    </head>
+    <body>
+      <nav class="navbar">
+        <div class="logo">SnapN<span>Shop</span></div>
   
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section about">
-                <h2>ShopNow</h2>
-                <p>Your go-to online store for the best deals and quality products.</p>
-            </div>
-    
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/shopkeeper/loingShopkeeper">LoingShopkeeper</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-    
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p>Email: support@shopnow.com</p>
-                <p>Phone: +1 234 567 890</p>
-                <p>Address: 123 Shopping Street, NY, USA</p>
-            </div>
-    
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+        <!-- <div class="search-container"> -->
+          <form method="post" class="search-container" action="/search">
+            <input
+              type="text"
+              id="search-input"
+              name="q"        
+              placeholder="Search for products..."
+              required
+            />
+            <button type="submit" id="search-btn">🔍</button>
+          </form>
+        <!-- </div> -->
+        
+        
+            <ul class="nav-links">
+              <li><a href="/user/createAccountForm">Create&nbsp;Account</a></li>
+              <li><a href="/user/loginform" class="btn">Log&nbsp;In</a></li>
+            </ul>
+         
+       
+  
+        <div class="hamburger">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </nav>
+      <%- include('./flash.ejs') %>
+      <div class="main">  
+            <main>
+              <div class="p-div-con">
+                <div class="img-div">
+                  <img src="./image/PC_Hero_2x-toys_1._CB582765723_.jpg" alt="" />
                 </div>
-            </div>
-        </div>
+        
+                <div class="card1-con">
+                  <div class="card1">
+                    <a href="/tab/lux">
+                      <div class="c-1">
+                        <div class="img">
+                          <img src="./image/36235261.avif" alt="" />
+                        </div>
+                        <div class="c-1-info">
+                          <h3 class="c-1-infoh3">Flaw-less Glow</h3>
+                          <p class="c-1-info-p">
+                            Introducing new LUX Flaw-less Glow, a reinvention of our
+                            iconic soap bar proven to deliver superior skin glow
+                            results. Infused with Vitamin C and E, this powerhouse
+                            formula visibly reduces dark spots and leaves your skin
+                            glowing and hydrated.
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+        
+                  <div class="card2">
+                    <a href="/tab/pantin">
+                        <div class="c-2">
+                            <img src="./image/th (1).jpeg" alt="">
+                        </div></a>
+                    <a href="/tab/Head_&_Shoulders">
+                        <div class="c-2">
+                           <img src="./image/th (2).jpeg" alt="">
+                        </div></a>
+                    <a href="/tab/loreal">
+                        <div class="c-2">
+                           <img src="./image/th (3).jpeg" alt="">
+                        </div></a>
+                    <a href="/tab/herbal_essences">
+                        <div class="c-2">
+                           <img src="./image/th.jpeg" alt="">
+                       </div></a>
+                  </div>
+                </div>
+            
+                <div class="card1-con">
+                    <div class="card2 bc">
+                        <a href="/tab/fortune">
+                            <div class="c-2">
+                                <img src="./image/61bqIKOLJzL._SY342_.jpg" alt="">
+                            </div></a>
+                        <a href="/tab/tata dal">
+                            <div class="c-2">
+                               <img src="./image/6efd204b-05d7-42ef-8582-164639e14eaf._CR0,0,3000,600_SX1920_.jpg" alt="">
+                            </div></a>
+                        <a href="/tab/good day">
+                            <div class="c-2">
+                               <img src="./image/91uSmU-fk4L._SX679_PIbundle-12,TopRight,0,0_AA679SH20_.jpg" alt="">
+                            </div></a>
+                        <a href="/tab/bingo">
+                            <div class="c-2">
+                               <img src="./image/51OqN1FHk9L._SX300_SY300_QL70_FMwebp_.webp" alt="">
+                           </div></a>
+                      </div>
+        
+                  <div class="card1">
+                    <a href="/tab/tata dry fruits">
+                      <div class="c-1">
+                        <div class="img">
+                          <img src="./image/th (4).jpeg" alt="" />
+                        </div>
+                        <div class="c-1-info">
+                          <h3 class="c-1-infoh3">Dry Fruit</h3>
+                          <p>
+                            HyperFoods RawFruit Jumbo 9 Dry Fruit Combo Dark Wood Gift Box | Premium Dried Fruit Berries Combo Gift Pack with Greeting Card | Sorry Note Card Apology Gift for Boyfriend Girlfriend Wife Husband
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
     
-        <div class="footer-bottom">
-            <p>&copy; 2025 ShopNow. All Rights Reserved.</p>
-        </div>
-    </footer>
-   
-    <!-- <script src="/rootForm.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-  </body>
-</html>
+  
+      <footer class="footer">
+          <div class="footer-container">
+              <div class="footer-section about">
+                  <h2>ShopNow</h2>
+                  <p>Your go-to online store for the best deals and quality products.</p>
+              </div>
+      
+              <div class="footer-section links">
+                  <h3>Quick Links</h3>
+                  <ul>
+                      <li><a href="/shopkeeper/loingShopkeeper">LoingShopkeeper</a></li>
+                      <li><a href="#">Contact</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                  </ul>
+              </div>
+      
+              <div class="footer-section contact">
+                  <h3>Contact Us</h3>
+                  <p>Email: support@shopnow.com</p>
+                  <p>Phone: +1 234 567 890</p>
+                  <p>Address: 123 Shopping Street, NY, USA</p>
+              </div>
+      
+              <div class="footer-section social">
+                  <h3>Follow Us</h3>
+                  <div class="social-icons">
+                      <a href="#"><i class="fab fa-facebook"></i></a>
+                      <a href="#"><i class="fab fa-twitter"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-linkedin"></i></a>
+                  </div>
+              </div>
+          </div>
+      
+          <div class="footer-bottom">
+              <p>&copy; 2025 ShopNow. All Rights Reserved.</p>
+          </div>
+      </footer>
+     
+      <!-- <script src="/rootForm.js"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    </body>
+  </html>
+  

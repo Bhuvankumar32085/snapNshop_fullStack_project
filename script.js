@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+
 const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -75,7 +76,7 @@ app.use(methodOverride("_method"));
 
 //DB connection
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/snapnshop");
+  await mongoose.connect(process.env.MONGO_URI);
 }
 main()
   .then(() => {
@@ -191,7 +192,7 @@ app.post("/payment/verify", async (req, res) => {
 
 //root
 app.get("/", (req, res, next) => {
-  console.log(req.user)
+  // console.log(req.user)
   res.render("rootForm.ejs");
 });
 

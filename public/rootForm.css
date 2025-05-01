@@ -323,6 +323,8 @@ main .p-div-con {
     margin-top: 20px;
 }
 
+
+
 .card1 {
     width: 40%;
     height: 100%;
@@ -374,7 +376,7 @@ main .p-div-con {
 .c-1-info p {
     margin-top: 10%;
     color: black;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
 }
 
 .card2 {
@@ -416,3 +418,34 @@ main .p-div-con {
     height: 90%;
 }
 
+
+@media (max-width: 650px) {
+    .card1-con {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    .card1{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .card2{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main{
+       padding:0;
+    }
+    main{
+        width: 100%;
+    }
+    .img-div img{
+        display: none;
+    }
+    .card1-con{
+        margin-top: 70px;
+    }
+}
