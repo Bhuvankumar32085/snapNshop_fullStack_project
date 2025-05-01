@@ -176,10 +176,22 @@ app.post("/payment/verify", async (req, res) => {
     // Payment failed
     res.status(400).json({ message: "Payment verification failed!" });
   }
+
+  if (expectedSignature === razorpay_signature) {
+    try {
+      // Capture manually just in case
+      await razorpay.payments.capture(razorpay_payment_id, amount, "INR");
+      return res.json({ message: "Payment verified and captured successfully!" });
+    } catch (err) {
+      console.error("Manual capture failed:", err);
+      return res.status(500).json({ message: "Payment verified but capture failed" });
+    }
+  }
 });
 
 //root
 app.get("/", (req, res, next) => {
+  console.log(req.user)
   res.render("rootForm.ejs");
 });
 

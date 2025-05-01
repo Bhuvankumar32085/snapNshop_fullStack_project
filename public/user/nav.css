@@ -184,3 +184,28 @@
         transform: rotate(-45deg) translate(5px, -5px);
     }
 }
+
+/* Add active styles for nav-links */
+.nav-links.active {
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Add active styles for search container */
+.search-container.active {
+    display: block;
+}
+
+/* Hamburger active styles for rotating bars */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
