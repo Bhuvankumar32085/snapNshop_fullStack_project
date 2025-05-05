@@ -50,15 +50,15 @@ shopkeeperRout.post(
 
     if(name!= shopkeeperdata.s_name){
       let err = "enter right name";
-      next(new CostemError(404,err));
+       return next(new CostemError(404,err));
     }
     if(email!= shopkeeperdata.s_email){
       let err = "enter right email";
-      next(new CostemError(500,err));
+      return next(new CostemError(500,err));
     }
     if(pass!= shopkeeperdata.s_password){
       let err = "enter right password";
-      next(new CostemError(500,err));
+      return next(new CostemError(500,err));
     }
   })
 );
