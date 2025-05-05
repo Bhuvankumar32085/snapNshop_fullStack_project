@@ -100,7 +100,8 @@
     <div class="con">
         <% for( let i = 0; i < allUser.length; i++ ) { %>
             <div class="card">
-                    <p>Name : <%= allUser[i].u_name %></p>
+                    <%= allUser[i].u_name %>
+                    <p>Name : <%= allUser[i].username %></p>
                     <p>Email : <%= allUser[i].u_email %></p>
                     <p>Number : <%= allUser[i].u_phone_num %></p>
                     <p>Location : <%= allUser[i].u_location %></p>

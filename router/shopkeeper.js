@@ -45,7 +45,7 @@ shopkeeperRout.post(
       email == shopkeeperdata.s_email &&
       pass == shopkeeperdata.s_password
     ) {
-      res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
+      res.render("shopkeeper/shopindex.ejs", { shopkeeperdata, items });
     }
 
     if(name!= shopkeeperdata.s_name){
@@ -68,6 +68,7 @@ shopkeeperRout.get(
   "/user",
   asyncWrap(async (req, res, next) => {
     let allUser = await User.find();
+    console.log(allUser)
     res.render("./shopkeeper/showAllUser.ejs", { allUser });
   })
 );

@@ -21,6 +21,7 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
+
 //model DB
 const Item = require("./model/index.js");
 const User = require("./model/user.js");
@@ -158,43 +159,45 @@ app.post(
 );
 
 // Payment verification route
-app.post("/payment/verify", async (req, res) => {
-  const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
-    req.body;
-
-  // Razorpay secret key (for signature verification)
-  const secret = process.env.RAZORPAY_KEY_SECRET;
-
-  // Create a string from payment details to verify
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
-
-  // Create HMAC hash using the secret key
-  const expectedSignature = crypto
-    .createHmac("sha256", secret)
-    .update(body)
-    .digest("hex");
-
-  // Compare the generated signature with the received one
-  if (expectedSignature === razorpay_signature) {
-    // Payment is successful
-    res.json({ message: "Payment verified successfully!" });
-    // Here, you can handle the success logic like updating the order status in your database
-  } else {
-    // Payment failed
-    res.status(400).json({ message: "Payment verification failed!" });
-  }
-
-  if (expectedSignature === razorpay_signature) {
-    try {
-      // Capture manually just in case
-      await razorpay.payments.capture(razorpay_payment_id, amount, "INR");
-      return res.json({ message: "Payment verified and captured successfully!" });
-    } catch (err) {
-      console.error("Manual capture failed:", err);
-      return res.status(500).json({ message: "Payment verified but capture failed" });
+app.post("/payment/verify", asyncWrap(
+  async (req, res) => {
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+      req.body;
+  
+    // Razorpay secret key (for signature verification)
+    const secret = process.env.RAZORPAY_KEY_SECRET;
+  
+    // Create a string from payment details to verify
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+  
+    // Create HMAC hash using the secret key
+    const expectedSignature = crypto
+      .createHmac("sha256", secret)
+      .update(body)
+      .digest("hex");
+  
+    // Compare the generated signature with the received one
+    if (expectedSignature === razorpay_signature) {
+      // Payment is successful
+      res.json({ message: "Payment verified successfully!" });
+      // Here, you can handle the success logic like updating the order status in your database
+    } else {
+      // Payment failed
+      res.status(400).json({ message: "Payment verification failed!" });
+    }
+  
+    if (expectedSignature === razorpay_signature) {
+      try {
+        // Capture manually just in case
+        await razorpay.payments.capture(razorpay_payment_id, amount, "INR");
+        return res.json({ message: "Payment verified and captured successfully!" });
+      } catch (err) {
+        console.error("Manual capture failed:", err);
+        return res.status(500).json({ message: "Payment verified but capture failed" });
+      }
     }
   }
-});
+));
 
 app.get('/adduser',asyncWrap(
   async(req,res,next)=>{
