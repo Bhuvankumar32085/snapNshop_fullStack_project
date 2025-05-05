@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const DataBaseUral=process.env.MONGO_URI || "mongodb://127.0.0.1:27017/snapnshop";
+const DataBaseUral=process.env.MONGO_URI;
 
 const express = require("express");
 const path = require("path");
@@ -199,12 +199,12 @@ app.post("/payment/verify", async (req, res) => {
 app.get('/adduser',asyncWrap(
   async(req,res,next)=>{
     let nawShopkeeper=new ShopKeeper({
-       s_name:'bhuvan',
-       s_email:'thakurbhuvanrahput32085gmail.com',
+       s_name:'nanu',
+       s_email:'nanu@gmail.com',
        s_password:'12345',
     })
     await nawShopkeeper.save();
-    res.send('shopkeeper add')
+    res.send('shopkeeper')
   }
 ))
 

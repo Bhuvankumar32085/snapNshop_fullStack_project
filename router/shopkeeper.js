@@ -33,9 +33,11 @@ shopkeeperRout.post(
   "/",validationShopkeeperSchema,
   asyncWrap(async (req, res, next) => {
     let { s_name: name, s_email: email, s_password: pass } = req.body;
+    // console.log(req.body)
     let shopkeeperdata = await ShopKeeper.findOne({
       s_email: email,
     });
+    console.log(shopkeeperdata)
     let items = await Item.find();
 
     if (
