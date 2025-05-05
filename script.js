@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const DataBaseUral=process.env.MONGO_URI || "mongodb://127.0.0.1:27017/snapnshop";
 
 const express = require("express");
 const path = require("path");
@@ -23,6 +24,7 @@ const razorpay = new Razorpay({
 //model DB
 const Item = require("./model/index.js");
 const User = require("./model/user.js");
+const ShopKeeper=require('./model/shopkeeper.js')
 
 // passport
 const passport = require("passport");
@@ -47,7 +49,7 @@ app.use(
       secure: process.env.NODE_ENV === 'production', // Make cookie secure in production (only sent over HTTPS)
     },
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI || "mongodb://127.0.0.1:27017/snapnshop", // Use environment variable for MongoDB URI
+      mongoUrl: DataBaseUral, // Use environment variable for MongoDB URI
       collectionName: "sessions", // Custom name for session collection
       ttl: 7 * 24 * 60 * 60, // Set TTL for the session in seconds (7 days in this case)
     }),
@@ -74,9 +76,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
+
+
 //DB connection
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect(DataBaseUral);
 }
 main()
   .then(() => {
@@ -92,6 +96,8 @@ function asyncWrap(fn) {
     fn(req, res, next).catch((err) => next(err));
   };
 }
+
+
 
 //flash middlewaier
 app.use((req, res, next) => {
@@ -189,6 +195,18 @@ app.post("/payment/verify", async (req, res) => {
     }
   }
 });
+
+app.get('/adduser',asyncWrap(
+  async(req,res,next)=>{
+    let nawShopkeeper=new ShopKeeper({
+       s_name:'bhuvan',
+       s_email:'thakurbhuvanrahput32085gmail.com',
+       s_password:'12345',
+    })
+    await nawShopkeeper.save();
+    res.send('shopkeeper add')
+  }
+))
 
 //root
 app.get("/", (req, res, next) => {
