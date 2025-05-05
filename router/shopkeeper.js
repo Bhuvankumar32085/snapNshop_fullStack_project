@@ -16,6 +16,7 @@ const validationShopkeeperSchema = (req, res, next) => {
   }
 };
 
+
 //error handel for async fun using asyncWrap
 function asyncWrap(fn) {
   return function (req, res, next) {
@@ -68,7 +69,6 @@ shopkeeperRout.get(
   "/user",
   asyncWrap(async (req, res, next) => {
     let allUser = await User.find();
-    console.log(allUser)
     res.render("./shopkeeper/showAllUser.ejs", { allUser });
   })
 );
@@ -107,7 +107,7 @@ shopkeeperRout.get(
     let { id } = req.params;
     let shopkeeperdata = await ShopKeeper.findById(id);
     let items = await Item.find();
-    res.render("./shopkeeper/shopIndex.ejs", { shopkeeperdata, items });
+    res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
   })
 );
 
