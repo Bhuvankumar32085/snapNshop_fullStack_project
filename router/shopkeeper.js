@@ -26,7 +26,7 @@ function asyncWrap(fn) {
 
 // footer shopkeeper link <<1>>
 shopkeeperRout.get("/loingShopkeeper", (req, res) => {
-  res.render("./loginAndSigin/LoingShopkeeper.ejs");
+  res.render("./loginAndSigin/LoingShopkeeper");
 });
 
 //login for shopkeeper <<2>>
@@ -132,6 +132,7 @@ shopkeeperRout.delete(
     }
   })
 );
+
 
 //item edit path <<1>>
 shopkeeperRout.get(
