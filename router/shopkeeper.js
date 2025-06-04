@@ -31,38 +31,37 @@ shopkeeperRout.get("/loingShopkeeper", (req, res) => {
 
 //login for shopkeeper <<2>>
 shopkeeperRout.post(
-  "/",validationShopkeeperSchema,
+  "/",
+  validationShopkeeperSchema,
   asyncWrap(async (req, res, next) => {
-    let { s_name: name, s_email: email, s_password: pass } = req.body;
-    // console.log(req.body)
-    let shopkeeperdata = await ShopKeeper.findOne({
-      s_email: email,
-    });
-    console.log(shopkeeperdata)
-    let items = await Item.find();
+    const { s_name: name, s_email: email, s_password: pass } = req.body;
 
-    if (
-      name == shopkeeperdata.s_name &&
-      email == shopkeeperdata.s_email &&
-      pass == shopkeeperdata.s_password
-    ) {
-      res.render("shopkeeper/shopindex.ejs", { shopkeeperdata, items });
+    // Shopkeeper data database se dhundho
+    const shopkeeperdata = await ShopKeeper.findOne({ s_email: email });
+
+    // Items bhi laao jo view me dikhani hain
+    const items = await Item.find();
+
+    // Agar koi shopkeeper nahi mila email se, toh error bhejo
+    if (!shopkeeperdata) {
+      return next(new CostemError(404, "Shopkeeper with this email not found"));
     }
 
-    if(name!= shopkeeperdata.s_name){
-      let err = "enter right name";
-       return next(new CostemError(404,err));
+    // Name check karo
+    if (name !== shopkeeperdata.s_name) {
+      return next(new CostemError(400, "Please enter the correct name"));
     }
-    if(email!= shopkeeperdata.s_email){
-      let err = "enter right email";
-      return next(new CostemError(500,err));
+
+    // Password check karo
+    if (pass !== shopkeeperdata.s_password) {
+      return next(new CostemError(400, "Please enter the correct password"));
     }
-    if(pass!= shopkeeperdata.s_password){
-      let err = "enter right password";
-      return next(new CostemError(500,err));
-    }
+
+    // Sab sahi hai, toh shopkeeper dashboard render karo (note: no '.ejs' extension)
+    res.render("shopkeeper/shopindex", { shopkeeperdata, items });
   })
 );
+
 
 //show All User
 shopkeeperRout.get(
