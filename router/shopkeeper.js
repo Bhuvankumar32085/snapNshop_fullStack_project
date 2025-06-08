@@ -90,7 +90,7 @@ shopkeeperRout.get(
     console.log(id)
     let shopkeeperdata = await ShopKeeper.findById(id);
     let items = await Item.find();
-    res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
+    res.render("shopkeeper/shopIndex", { shopkeeperdata, items });
   })
 );
 
