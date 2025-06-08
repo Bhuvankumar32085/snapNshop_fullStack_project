@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Payment Page</title>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
@@ -46,66 +46,67 @@
     #pay-button:hover {
       background: #0056cc;
     }
+
   </style>
 </head>
 
 <body>
 
   <div class="payment-container">
-    <h1>Pay</h1>
-    <button id="pay-button">Pay ₹<%= amount/100 %></button>
+    <h1>Pay ₹<%= (amount / 100).toFixed(2) %></h1>
+    <button id="pay-button">Pay Now</button>
   </div>
 
   <script>
-    var options = {
+    const options = {
       key: "<%= keyId %>",
-      amount: "<%= amount %>",
+      amount: '<%= amount %>',
       currency: "INR",
       name: "SnapNShop",
       description: "Purchase Item",
       order_id: "<%= orderId %>",
       handler: function (response) {
-        console.log(response);
 
         fetch("/payment/verify", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(response),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+            userId: "<%= userId %>",
+            shopkeeperId: "<%= shopkeeperId %>"
+          }),
         })
-        .then(res => res.json())
-        .then(data => {
-          alert(data.message);
-          // window.location.href = "/payment/success";
-        })
-        .catch(err => {
-          console.error(err);
-          alert("Payment verification failed");
-        });
+          .then((res) => res.json())
+          .then((data) => {
+            alert(data.message);
+            // Redirect or show success page here if needed
+            // window.location.href = "/payment/success";
+          })
+          .catch(() => {
+            alert("Payment verification failed");
+          });
       },
       prefill: {
         name: "Your Name",
         email: "your-email@example.com",
-        contact: "9999999999"
+        contact: "9999999999",
       },
       notes: {
-        address: "SnapNShop Office"
+        address: "SnapNShop Office",
       },
       theme: {
-        color: "#0072ff"
-      }
+        color: "#0072ff",
+      },
     };
 
-    // Ye 2 line add karo
-    var rzp1 = new Razorpay(options);
+    const rzp1 = new Razorpay(options);
 
-    document.getElementById('pay-button').onclick = function(e){
+    document.getElementById("pay-button").onclick = function (e) {
       rzp1.open();
       e.preventDefault();
-    }
-</script>
-
-
+    };
+  </script>
 </body>
 </html>

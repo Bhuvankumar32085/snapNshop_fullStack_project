@@ -102,7 +102,7 @@
     <div class="user">
         <%- include('../flash.ejs') %>
         <h3>Login For User</h3>
-        <form id="aa" method="POST" action="/user" autocomplete="on">
+        <form autocomplete="off" id="aa" method="POST" action="/user">
             <div class="u-name">
               <label for="username">Username</label>
               <input 
@@ -111,7 +111,7 @@
                 name="username" 
                 placeholder="Enter your name"  
                 required 
-                autocomplete="username"
+                autocomplete="off"
               >
             </div>
           
@@ -123,7 +123,7 @@
                 name="password" 
                 placeholder="Enter your password" 
                 required 
-                autocomplete="current-password"
+                autocomplete="new-password"
               >
             </div>
           

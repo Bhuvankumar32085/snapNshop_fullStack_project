@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 let schema = new mongoose.Schema({
   i_img: {
@@ -19,6 +20,11 @@ let schema = new mongoose.Schema({
   },
   description: {
     type: String,
+  },
+  shopkeeperId: {
+    type: Schema.Types.ObjectId,
+    ref: "shopkeeper",
+    required: true,
   },
 });
 let item = mongoose.model("item", schema);

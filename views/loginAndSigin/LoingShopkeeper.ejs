@@ -1,160 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login For Shopkeeper</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-        }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      }
 
+      .shopkeeper {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        width: 350px;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      h3 {
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+      }
+
+      .shopkeeper div {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      label {
+        font-weight: 400;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: #ff758c;
+        box-shadow: 0px 0px 5px rgba(255, 117, 140, 0.5);
+      }
+
+      .btn {
+        width: 100%;
+        background: #ff758c;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #e0566c;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 400px) {
         .shopkeeper {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            width: 350px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
+          width: 90%;
+          padding: 20px;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        h3 {
-            margin-bottom: 20px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .shopkeeper div {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            font-weight: 400;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #ff758c;
-            box-shadow: 0px 0px 5px rgba(255, 117, 140, 0.5);
-        }
-
-        .btn {
-            width: 100%;
-            background: #ff758c;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #e0566c;
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 400px) {
-            .shopkeeper {
-                width: 90%;
-                padding: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="shopkeeper">
-        <h3>Login For Shopkeeper</h3>
-        <form id="aa" method="post" action="/shopkeeper" class="needs-validation" novalidate>
-            <div class="s-name">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="s_name" placeholder="Enter Your Name"  class="form-control" id="validationCustom01" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="s-email">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="s_email" placeholder="Enter Your Email"  class="form-control" id="validationCustom02" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid email.
-                </div>
-            </div>
-            <div class="s-pass">
-                <label for="pass">Password</label>
-                <input type="password" id="pass" name="s_password" placeholder="Enter Your Password" minlength="5"  class="form-control" id="validationCustom03" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid password.
-                </div>
-            </div>
-            <div class="p-btn">
-                <button type="submit" class="btn">Login For Shopkeeper</button>
-            </div>
-        </form>
+      <h3>Login For Shopkeeper</h3>
+      <form
+        autocomplete="off"
+        id="aa"
+        method="post"
+        action="/shopkeeper"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="s-name">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="s_name"
+            placeholder="Enter Your Name"
+            class="form-control"
+            autocomplete="off"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="s-email">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="s_email"
+            placeholder="Enter Your Email"
+            class="form-control"
+            autocomplete="off"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide a valid email.</div>
+        </div>
+        <div class="s-pass">
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            id="pass"
+            name="s_password"
+            placeholder="Enter Your Password"
+            minlength="5"
+            class="form-control"
+            autocomplete="new-password"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide a valid password.</div>
+        </div>
+        <div class="p-btn">
+          <button type="submit" class="btn">Login For Shopkeeper</button>
+        </div>
+      </form>
     </div>
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-        'use strict'
-      
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-      
+        const forms = document.querySelectorAll(".needs-validation");
+
         // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-          form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-      
-            form.classList.add('was-validated')
-          }, false)
-        })
-      })()
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

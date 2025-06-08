@@ -58,7 +58,7 @@ shopkeeperRout.post(
     }
 
     // Sab sahi hai, toh shopkeeper dashboard render karo (note: no '.ejs' extension)
-    res.render("shopkeeper/shopindex", { shopkeeperdata, items });
+    res.render("shopkeeper/shopIndex", { shopkeeperdata, items });
   })
 );
 
@@ -68,7 +68,7 @@ shopkeeperRout.get(
   "/user",
   asyncWrap(async (req, res, next) => {
     let allUser = await User.find();
-    res.render("./shopkeeper/showAllUser.ejs", { allUser });
+    res.render("shopkeeper/showAllUser.ejs", { allUser });
   })
 );
 

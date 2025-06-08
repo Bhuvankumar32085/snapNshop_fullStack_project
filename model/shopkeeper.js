@@ -12,6 +12,12 @@ let shopkeeperSchema = new Schema({
   s_password: {
     type: String,
   },
+  buyers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 
 let shopKeeper = mongoose.model("shopkeeper", shopkeeperSchema);
