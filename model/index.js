@@ -21,11 +21,11 @@ let schema = new mongoose.Schema({
   description: {
     type: String,
   },
-  shopkeeperId: {
-    type: Schema.Types.ObjectId,
-    ref: "shopkeeper",
-    required: true,
-  },
+  // shopkeeperId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "shopkeeper",
+  //   required: true,
+  // },
 });
 let item = mongoose.model("item", schema);
 module.exports = item;

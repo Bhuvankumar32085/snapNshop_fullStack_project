@@ -82,9 +82,22 @@ shopkeeperRout.delete(
   })
 );
 
+//this page for redirect shopkeeper page
+shopkeeperRout.get(
+  "/:id",
+  asyncWrap(async (req, res, next) => {
+    let { id } = req.params;
+    console.log(id)
+    let shopkeeperdata = await ShopKeeper.findById(id);
+    let items = await Item.find();
+    res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
+  })
+);
+
 //add item for shopkeeper side <<1>>
 shopkeeperRout.get("/:shopkeeperId/additem", (req, res) => {
   let { shopkeeperId } = req.params;
+  // console.log(shopkeeperId)
   res.render("./shopkeeper/addItem.ejs", { shopkeeperId });
 });
 
@@ -94,21 +107,13 @@ shopkeeperRout.post(
   asyncWrap(async (req, res, next) => {
     let { shopkeeperId } = req.params;
     let formData = req.body.u;
+    // console.log(shopkeeperId)
     let addItem = await Item.insertOne({ ...formData });
+    // res.send("don")
     res.redirect(`/shopkeeper/${shopkeeperId}`);
   })
 );
 
-//this page for redirect shopkeeper page
-shopkeeperRout.get(
-  "/:id",
-  asyncWrap(async (req, res, next) => {
-    let { id } = req.params;
-    let shopkeeperdata = await ShopKeeper.findById(id);
-    let items = await Item.find();
-    res.render("./shopkeeper/shopindex.ejs", { shopkeeperdata, items });
-  })
-);
 
 //item delete path <<1>>
 shopkeeperRout.get("/:itemId/:shopkeeperId/delete", (req, res) => {
